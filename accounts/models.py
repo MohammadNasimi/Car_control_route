@@ -7,7 +7,16 @@ from django.contrib.auth.models import AbstractUser,UserManager
 class MyUserManager(UserManager):
     def create_superuser(self, username=None, email=None, password=None, **extra_fields):
         username = extra_fields['national_code']
-        return self.create_user(username, email, password, **extra_fields)
+        extra_fields.setdefault('is_staff', True)
+        extra_fields.setdefault('is_superuser', True)
+        return self._create_user(username, email, password, **extra_fields)
+    def create_user(self, username, email=None, password=None, **extra_fields):
+        username = extra_fields['national_code']
+        extra_fields.setdefault('is_staff', False)
+        extra_fields.setdefault('is_superuser', False)
+        return self._create_user(username, email, password, **extra_fields)
+
+
 
 class User(AbstractUser):
    national_code = models.CharField( max_length=10,null =True,blank=True,unique=True)
