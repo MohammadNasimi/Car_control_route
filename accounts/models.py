@@ -16,3 +16,5 @@ class User(AbstractUser):
    USERNAME_FIELD = 'national_code'
 
    objects =MyUserManager()    
+   def __str__(self) :
+      return f'{self.national_code}'
