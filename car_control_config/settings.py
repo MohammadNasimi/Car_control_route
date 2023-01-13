@@ -37,12 +37,14 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # rest_framework 
+    'django.contrib.gis',
+    # rest_framework app
     'rest_framework',
     'rest_framework_gis',
-    #app
+    #app 
     'accounts',
-    'car'
+    'car',
+    'stations',
 ]
 
 MIDDLEWARE = [
@@ -78,14 +80,23 @@ WSGI_APPLICATION = 'car_control_config.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
+import os
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.contrib.gis.db.backends.spatialite',
+        'NAME': os.path.join(BASE_DIR, 'basetest.sqlite3'),
     }
 }
-
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.contrib.gis.db.backends.postgis',
+#         'NAME': 'geodjango',
+#         'USER': 'geo',
+#         'PASSWORD': '123456789Mn',
+#         'HOST': 'localhost',
+#         'PORT': '',
+#     },
+# }
 
 # Password validation
 # https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
@@ -130,3 +141,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 # add settings chane username to national_code 
 AUTH_USER_MODEL = 'accounts.User'
+#####gis route 
+# GDAL_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgdal.dylib'
+# GEOS_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgeos_c.dylib'
