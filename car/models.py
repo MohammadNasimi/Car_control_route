@@ -1,6 +1,7 @@
 from django.db import models
 
 from accounts.models import User
+from route.models import Route
 # Create your models here.
 Choices_type_car =(
     ('1','small'),
@@ -15,4 +16,10 @@ class Car (models.Model):
     
     def __str__(self) :
         return f'{self.owner,self.type}'
-   
+
+class CarFine(models.Model):
+    car = models.ForeignKey(Car,on_delete=models.CASCADE,null=False)
+    route = models.ForeignKey(Route,on_delete=models.CASCADE,null=False)
+
+    def __str__(self) :
+        return f'{self.car.type,self.route.name}'
