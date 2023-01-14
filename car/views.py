@@ -10,7 +10,7 @@ from car.serializers import Carserializer
 from car.models import Car
 from accounts.models import User
 #rest framework
-from rest_framework.generics import ListCreateAPIView,RetrieveUpdateDestroyAPIView,CreateAPIView
+from rest_framework.generics import ListCreateAPIView,ListAPIView
 
 
 ###########Car############################
@@ -39,3 +39,12 @@ class CreateCarView(ListCreateAPIView):
     
     def perform_create(self, serializer):
         serializer.save(owner_id = self.request.user.id) 
+
+
+# list all car color red or blue
+class ListCarView(ListAPIView):
+    serializer_class = Carserializer
+     
+    def get_queryset(self):
+        queryset =Car.objects.filter(color__in=["red","blue"])
+        return queryset
