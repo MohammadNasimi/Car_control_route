@@ -5,9 +5,9 @@ from rest_framework.response import Response
 from rest_framework import status
 # Create your views here.
 #serializer
-from car.serializers import Carserializer
+from car.serializers import Carserializer,CarFineserializer
 #models
-from car.models import Car
+from car.models import Car,CarFine
 from accounts.models import User
 #rest framework
 from rest_framework.generics import ListCreateAPIView,ListAPIView
@@ -55,3 +55,8 @@ class ListCarAgeownerView(ListAPIView):
     
     def get_queryset(self):
         return Car.objects.filter(owner__age__gte = 70)
+
+# list carfine across route width greater than 20 meters
+class ListCarfineView(ListAPIView):
+    serializer_class = CarFineserializer
+    get_queryset = CarFine.objects.all()
