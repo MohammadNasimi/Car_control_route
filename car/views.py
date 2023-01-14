@@ -42,9 +42,16 @@ class CreateCarView(ListCreateAPIView):
 
 
 # list all car color red or blue
-class ListCarView(ListAPIView):
+class ListCarColorView(ListAPIView):
     serializer_class = Carserializer
      
     def get_queryset(self):
         queryset =Car.objects.filter(color__in=["red","blue"])
         return queryset
+    
+# car owner has greater than 70
+class ListCarAgeownerView(ListAPIView):
+    serializer_class = Carserializer
+    
+    def get_queryset(self):
+        return Car.objects.filter(owner__age__gte = 70)
