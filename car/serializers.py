@@ -12,4 +12,4 @@ class CarFineserializer(serializers.ModelSerializer):
     car = Carserializer(read_only = True)
     class Meta:
         model = CarFine
-        fields = ('id', 'car','route')
+        fields = ('id', 'car','route','date')
