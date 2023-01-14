@@ -37,7 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'django.contrib.gis',
+    # 'django.contrib.gis',
     # rest_framework app
     'rest_framework',
     'rest_framework_gis',
@@ -45,6 +45,10 @@ INSTALLED_APPS = [
     'accounts',
     'car',
     'stations',
+    'route',
+    #jwt
+    'rest_framework_simplejwt',
+
 ]
 
 MIDDLEWARE = [
@@ -83,7 +87,9 @@ WSGI_APPLICATION = 'car_control_config.wsgi.application'
 import os
 DATABASES = {
     'default': {
-        'ENGINE': 'django.contrib.gis.db.backends.spatialite',
+        # 'ENGINE': 'django.contrib.gis.db.backends.spatialite',
+        'ENGINE': 'django.db.backends.sqlite3',
+
         'NAME': os.path.join(BASE_DIR, 'basetest.sqlite3'),
     }
 }
@@ -144,3 +150,14 @@ AUTH_USER_MODEL = 'accounts.User'
 #####gis route 
 # GDAL_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgdal.dylib'
 # GEOS_LIBRARY_PATH = '/opt/homebrew/opt/geos/lib/libgeos_c.dylib'
+
+#### rest setting
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    ),
+    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    'PAGE_SIZE': 5,
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+
+}
