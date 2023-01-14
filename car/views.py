@@ -57,6 +57,6 @@ class ListCarAgeownerView(ListAPIView):
         return Car.objects.filter(owner__age__gte = 70)
 
 # list carfine across route width greater than 20 meters
-class ListCarfineView(ListAPIView):
+class ListCarFineView(ListAPIView):
     serializer_class = CarFineserializer
     get_queryset = CarFine.objects.all()
