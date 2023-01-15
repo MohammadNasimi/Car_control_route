@@ -19,6 +19,8 @@ from drf_yasg.utils import swagger_auto_schema
 
 
 class LoginView(generics.GenericAPIView):
+    serializer_class =LoginSerializer
+    
     @swagger_auto_schema(operation_description=docs.log_in_post,tags=['accounts'])
     def post(self, request, *args, **kwargs):
         if "password" not in request.data or "national_code" not in request.data:
