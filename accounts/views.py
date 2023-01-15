@@ -61,7 +61,8 @@ class RegisterView(APIView):
         
         
         if request.data.get('national_code') == None or request.data.get('password') == None \
-                            or request.data.get('password2') == None or request.data.get('age')==None:
+                            or request.data.get('password2') == None or request.data.get('age')==None  \
+                            or request.data.get("first_name")==None:
                 return Response({"detail": "اطلاعات ارسالی کامل نیست."} , status=status.HTTP_400_BAD_REQUEST)
         elif request.data.get('password') !=request.data.get('password2'):
                 return Response({"detail": "pass not matched"} , status=status.HTTP_400_BAD_REQUEST)
