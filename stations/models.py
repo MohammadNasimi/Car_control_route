@@ -17,3 +17,12 @@ class Toll(models.Model):
     
     def __str__(self):
         return self.car.owner.national_code
+    
+    @property
+    def User_toll_paid(self):
+        if self.car.type =='1':
+            toll_paid_small_car = 10000
+            return self.car.owner.total_toll_paid +toll_paid_small_car
+        else:
+            toll_paid_big_car = 1000
+            return self.car.owner.total_toll_paid +toll_paid_big_car*self.car.load_valume
