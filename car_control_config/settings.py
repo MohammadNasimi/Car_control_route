@@ -48,6 +48,8 @@ INSTALLED_APPS = [
     'route',
     #jwt
     'rest_framework_simplejwt',
+    #swagger
+    'drf_yasg'
 
 ]
 
@@ -159,4 +161,14 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 5,
 
+}
+# log in swagger panel with Bearer jwt
+SWAGGER_SETTINGS = {
+    'SECURITY_DEFINITIONS': {
+        "Auth Token eg [Bearer {JWT}]": {
+            "type": "apiKey",
+            "name": "Authorization",
+            "in": "header"
+        }
+    }
 }
