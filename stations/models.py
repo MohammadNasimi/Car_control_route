@@ -16,4 +16,4 @@ class Toll(models.Model):
     date = models.DateField()
     
     def __str__(self):
-        return self.car
+        return self.car.owner.national_codes
