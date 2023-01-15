@@ -22,11 +22,11 @@ class ListTollView(ListAPIView):
         queryset =Toll.objects.all()
         search_key = self.request.GET.get('search_key')
         if search_key == "user":
-            user_id = self.kwargs['search_key']
-            queryset.filter(car__owner_id = user_id)
+            User_id = self.kwargs['id']
+            queryset.filter(car__owner_id = User_id)
         elif search_key == "car":
-            car_id = self.kwargs['search_key']
-            queryset.filter(car_id = car_id)
+            Car_id = self.kwargs['id']
+            queryset.filter(car_id = Car_id)
         date_from = self.request.GET.get('date_from')
         date_to = self.request.GET.get('date_to')
         if date_from is not None and date_to is not None:
