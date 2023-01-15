@@ -89,10 +89,10 @@ WSGI_APPLICATION = 'car_control_config.wsgi.application'
 import os
 DATABASES = {
     'default': {
-        # 'ENGINE': 'django.contrib.gis.db.backends.spatialite',
-        'ENGINE': 'django.db.backends.sqlite3',
+        'ENGINE': 'django.contrib.gis.db.backends.spatialite',
+        # 'ENGINE': 'django.db.backends.sqlite3',
 
-        'NAME': os.path.join(BASE_DIR, 'basetest.sqlite3'),
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
 # DATABASES = {
