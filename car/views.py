@@ -11,7 +11,10 @@ from car.models import Car,CarFine
 from accounts.models import User
 #rest framework
 from rest_framework.generics import ListCreateAPIView,ListAPIView
-
+#swagger 
+from car import docs
+# drf-ysg for swagger import
+from drf_yasg.utils import swagger_auto_schema
 
 ###########Car############################
 class CreateCarView(ListCreateAPIView):
@@ -39,6 +42,14 @@ class CreateCarView(ListCreateAPIView):
     
     def perform_create(self, serializer):
         serializer.save(owner_id = self.request.user.id) 
+        
+    @swagger_auto_schema(operation_description=docs.car_list_get,tags=['car'])
+    def get(self, request, *args, **kwargs):
+            return self.list(request, *args, **kwargs)
+
+    @swagger_auto_schema(operation_description=docs.car_list_post,tags=['car'])   
+    def post(self, request, *args, **kwargs):
+                return self.create(request, *args, **kwargs)
 
 
 # list all car color red or blue
@@ -48,6 +59,9 @@ class ListCarColorView(ListAPIView):
     def get_queryset(self):
         queryset =Car.objects.filter(color__in=["red","blue"])
         return queryset
+    @swagger_auto_schema(operation_description=docs.car_list_color_get,tags=['car'])
+    def get(self, request, *args, **kwargs):
+            return self.list(request, *args, **kwargs)
     
 # car owner has greater than 70
 class ListCarAgeownerView(ListAPIView):
@@ -55,6 +69,10 @@ class ListCarAgeownerView(ListAPIView):
     
     def get_queryset(self):
         return Car.objects.filter(owner__age__gte = 70)
+    @swagger_auto_schema(operation_description=docs.car_list_age_get,tags=['car'])
+    def get(self, request, *args, **kwargs):
+            return self.list(request, *args, **kwargs)
+    
 
 # list carfine across route width lower than 20 meters
 class ListCarFineView(ListAPIView):
@@ -64,3 +82,7 @@ class ListCarFineView(ListAPIView):
         queryset = queryset.filter(route__width__lte = 20)
         return queryset
         
+    @swagger_auto_schema(operation_description=docs.carfine_list_get,tags=['car'])
+    def get(self, request, *args, **kwargs):
+            return self.list(request, *args, **kwargs)
+    
