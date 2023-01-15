@@ -5,7 +5,7 @@ from django.db import models
 class Route(models.Model):
     name = models.CharField(max_length=15,null=False,blank=False)
     width = models.PositiveBigIntegerField(null=False,blank=False)
-    # geom = gis_models.MultiLineStringField()
+    # geom = gis_models.MultiLineStringField(srid=4326)
     
 
     def __str__(self):
