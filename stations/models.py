@@ -13,7 +13,7 @@ class Stations(models.Model):
 class Toll(models.Model):
     car = models.ForeignKey(Car,on_delete=models.CASCADE,null=False,blank=False)
     station = models.ForeignKey(Stations,on_delete=models.CASCADE,null=False,blank=False)
-    date = models.DateField()
+    date = models.DateField(auto_now_add=True)
     
     def __str__(self):
         return self.car.owner.national_code
