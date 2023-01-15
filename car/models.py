@@ -20,7 +20,7 @@ class Car (models.Model):
 class CarFine(models.Model):
     car = models.ForeignKey(Car,on_delete=models.CASCADE,null=False)
     route = models.ForeignKey(Route,on_delete=models.CASCADE,null=False)
-    date = models.DateField()
+    date = models.DateField(auto_now_add=True)
 
     def __str__(self) :
         return f'{self.car.type,self.route.name}'
