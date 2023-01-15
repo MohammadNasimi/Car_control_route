@@ -78,7 +78,7 @@ class ListCarAgeownerView(ListAPIView):
 class ListCarFineView(ListAPIView):
     serializer_class = CarFineserializer
     def get_queryset(self):
-        queryset=CarFine.objects.filter(Car__type = "2")
+        queryset=CarFine.objects.filter(car__type = "2")
         queryset = queryset.filter(route__width__lte = 20)
         return queryset
         
