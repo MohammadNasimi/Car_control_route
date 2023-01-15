@@ -12,9 +12,14 @@ from accounts.serializers import LoginSerializer
 from rest_framework_simplejwt.tokens import RefreshToken
 #django auth 
 from django.contrib.auth import authenticate
+#swagger 
+from accounts import docs,params
+# drf-ysg for swagger import
+from drf_yasg.utils import swagger_auto_schema
+
 
 class LoginView(generics.GenericAPIView):
-
+    @swagger_auto_schema(operation_description=docs.log_in_post,tags=['accounts'])
     def post(self, request, *args, **kwargs):
         if "password" not in request.data or "national_code" not in request.data:
             return Response({"detail": "اطلاعات ارسالی کامل نیست."} , status=status.HTTP_400_BAD_REQUEST)
@@ -40,6 +45,7 @@ class LoginView(generics.GenericAPIView):
         
         
 class RegisterView(APIView):
+    @swagger_auto_schema(operation_description=docs.register_post,tags=['accounts'])
     def post(self, request, *args, **kwargs):
         email= request.data.get("email" ,"")
         first_name= request.data.get("first_name" ,"")
