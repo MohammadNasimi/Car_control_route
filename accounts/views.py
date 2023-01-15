@@ -13,7 +13,7 @@ from rest_framework_simplejwt.tokens import RefreshToken
 #django auth 
 from django.contrib.auth import authenticate
 #swagger 
-from accounts import docs,params
+from accounts import docs
 # drf-ysg for swagger import
 from drf_yasg.utils import swagger_auto_schema
 
