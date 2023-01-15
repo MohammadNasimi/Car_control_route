@@ -1,8 +1,12 @@
 from django.shortcuts import render
 from rest_framework.generics import ListAPIView
+from rest_framework.permissions import IsAdminUser
+
 from stations.serializers import Tollserializer
 from stations.models import Toll
-from rest_framework.permissions import IsAdminUser
+
+from accounts.models import User
+from accounts.serializers import UserTollListserializer
 # Create your views here.
 #date 
 from datetime import date
@@ -28,3 +32,11 @@ class ListTollView(ListAPIView):
         elif  date_to is not None:
             queryset=queryset.filter(date__lte =date.fromisoformat(date_to))                        
         return queryset
+
+class ListUserTollView(ListAPIView):
+    serializer_class = UserTollListserializer
+    permission_classes =[IsAdminUser]
+    
+    def get_queryset(self):
+        return User.objects.filter(total_toll_paid__gte = 0).order_by('total_toll_paid').values()
+    
