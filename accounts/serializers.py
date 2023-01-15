@@ -7,3 +7,8 @@ class LoginSerializer(serializers.ModelSerializer):
         model = User
         fields = ('id', 'national_code', 'password','email', 'first_name', 'last_name','age','total_toll_paid')
         read_only_fields = ('id','email', 'first_name', 'last_name')
+        
+class UserTollListserializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = ( 'national_code''first_name','total_toll_paid')
