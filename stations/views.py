@@ -10,6 +10,11 @@ from accounts.serializers import UserTollListserializer
 # Create your views here.
 #date 
 from datetime import date
+#swagger 
+from stations import docs,params
+# drf-ysg for swagger import
+from drf_yasg.utils import swagger_auto_schema
+
 class ListTollView(ListAPIView):
     serializer_class = Tollserializer
     permission_classes=[IsAdminUser]
@@ -32,6 +37,10 @@ class ListTollView(ListAPIView):
         elif  date_to is not None:
             queryset=queryset.filter(date__lte =date.fromisoformat(date_to))                        
         return queryset
+    @swagger_auto_schema(operation_description=docs.toll_list_get,tags=['stations'],
+                    manual_parameters=[params.search_key,params.date_from,params.date_to])
+    def get(self, request, *args, **kwargs):
+            return self.list(request, *args, **kwargs)
 
 class ListUserTollView(ListAPIView):
     serializer_class = UserTollListserializer
@@ -40,3 +49,6 @@ class ListUserTollView(ListAPIView):
     def get_queryset(self):
         return User.objects.filter(total_toll_paid__gte = 0).order_by('total_toll_paid').values()
     
+    @swagger_auto_schema(operation_description=docs.toll_user_list_get,tags=['stations'])
+    def get(self, request, *args, **kwargs):
+            return self.list(request, *args, **kwargs)
