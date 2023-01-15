@@ -11,4 +11,4 @@ class LoginSerializer(serializers.ModelSerializer):
 class UserTollListserializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ( 'national_code''first_name','total_toll_paid')
+        fields = ( 'national_code','first_name','total_toll_paid')
