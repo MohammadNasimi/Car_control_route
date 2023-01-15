@@ -5,7 +5,7 @@ from car.models import Car
 class Stations(models.Model):
     name = models.CharField(max_length=15,null=False,blank=False)
     toll_per_cross = models.PositiveBigIntegerField(null=False,blank=False)
-    #location = gis_models.PointField()
+    # location = gis_models.PointField(null=True, blank=True)
     
     def __str__(self):
         return self.name
